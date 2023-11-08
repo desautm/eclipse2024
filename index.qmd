@@ -1,11 +1,132 @@
 ---
-title: "eclipse2024"
+title: "5000 ans d'éclipses"
+execute:
+  echo: false
 ---
 
-This is a Quarto website.
+```{r, label="setup", warning=F, message=F}
+library(tidyverse)
+library(here)
+library(knitr)
+library(plotly)
+load(here("data","eclipse.RData"))
+```
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+## Éclipse totale de soleil du 8 avril 2024
+
+La prochaine éclipse solaire totale observable se déroulera le 8 avril 2024. C'est une chance inouïe de pouvoir observer ce phénomène céleste naturel. Un peu de planification sera nécessaire pour ne pas se priver d'un tel spectacle!
+
+## Étudier les données
+
+Pour mieux comprendre les éclipses, nous sommes allés chercher des données s'étalant sur 5 000 ans disponibles sur le site [Five Millenium Catalog of Hybrid Solar Eclipses](https://eclipse.gsfc.nasa.gov/SEcat5/SEhybrid5.html).
+
+Cette base de données regroupe `r nrow(eclipse)` éclipses s'étalant de l'année `r min(eclipse$year)` à l'année `r max(eclipse$year)`. Ça correspond à une moyenne de `r eclipse %>% group_by(year) %>% summarise(n = n()) %>% summarise(mean = mean(n))` éclipses par année.
+
+La base de données sépare les éclipses en 4 types distincts:
+
+Éclipse totale
+: La Lune recouvre complètement le Soleil.
+
+Éclipse annulaire 
+: La Lune se trouve plus près du Soleil. Ainsi, la Lune semble plus petite que le Soleil de notre point de vue. Un anneau du Soleil est visible autour de la Lune.
+
+Éclipse hybride
+: L'éclipse a des portions d'éclipse totale et annulaire.
+
+Éclipse partielle
+: Le Soleil et la Lune ne sont pas parfaitement alignés. Seulement une partie du Soleil est cachée par la Lune.
+
+Des `r nrow(eclipse)` éclipses se trouvant dans la base de données, nous pouvons trouver le nombre d'éclipses de chaque type.
 
 ```{r}
-1 + 1
+#| label: tableau-type-eclipse
+
+eclipse %>% 
+  group_by(type) %>% 
+  summarise(n = n()) %>% 
+  kable()
 ```
+
+Si nous représentons ces données dans un graphique, nous obtenons:
+
+```{r}
+#| label: graphique-type-eclipse
+
+eclipse %>% 
+  group_by(type) %>% 
+  summarise(n = n()) %>% 
+  mutate(pct = prop.table(n)) %>% 
+  mutate(type = fct_reorder(type, n)) %>% 
+  mutate(temp = "toto") %>% 
+  ggplot(aes(x = temp, y = n, fill = type, label = scales::percent(pct,accuracy = 0.01,decimal.mark = ","))) +
+  geom_bar(position="fill", stat = "identity") +
+  scale_y_continuous(labels = scales::label_percent()) +
+  geom_text(position = position_fill(vjust = 0.5)) +
+  ylab("Pourcentage du nombre total d'éclipses") +
+  xlab("") +
+  theme(
+    axis.title.x = element_blank(),
+    axis.text.x = element_blank(),
+    axis.ticks.x = element_blank()
+  )
+```
+
+Nous remarquons que presque 27% des éclipses sont totales.
+
+## Les éclipses selon les saisons
+
+Puisque nous avons la date de chacune des éclipses, nous pouvons observer la variation du nombre d'éclipses en fonction du mois de l'année.
+
+```{r}
+#| label: graphique-eclipse-mois
+
+p<-eclipse %>%
+  group_by(mois, type) %>%
+  mutate(nombre = n()) %>%
+  ungroup() %>%
+  ggplot(aes(x = mois, y = nombre, col = type, group = 1)) +
+  geom_point() +
+  geom_line() +
+  labs(
+    x = "Mois",
+    y = "Nombre d'éclipses",
+    title = "Nombre d'éclipses par mois en fonction du type"
+  ) +
+  theme(axis.text.x = element_text(angle = 90))
+ggplotly(p)
+```
+
+On remarque une augmentation marquée du nombre d'éclipses totales au milieu de l'année.
+
+## Nombres de Saros
+
+Le [Saros](https://www.wikiwand.com/fr/Saros) est, en astronomie, une période d'environ 18 ans qui peut être utilisée pour prédire les éclipses de Soleil et de Lune.
+
+Après cet intervalle d'un Saros suivant une éclipse, le Soleil, la Terre et la Lune retrouvent approximativement la même configuration relative, et une éclipse presque identique se produit.
+
+Le Saros est le temps au bout duquel les éclipses de Lune ou de Soleil seront « sensiblement les mêmes » que la fois précédente. Le Saros est une période de 6 585,321 jours, soit 18 ans, 11 jours (10 jours si l'intervalle contient 5 années bissextiles) 7 heures et 43 minutes.
+
+Puisque la base de données contient les nombres de Saros pour toutes les éclipses sur 5 000 ans, nous pouvons visualiser les récurrences des éclipses en fonction du nombre de Saros.
+
+```{r}
+#| label: graphique-saros
+
+p <- eclipse %>%
+  rename(
+    `Année` = year,
+    `Nombre de Saros` = saros_number
+  ) %>%
+  ggplot(aes(x=`Année`, y=`Nombre de Saros`, col = type)) +
+  geom_point(alpha = 0.25) +
+  scale_x_continuous(breaks = seq(from = -2000, to = 3000, by = 500))
+ggplotly(p)
+```
+
+
+
+
+
+
+
+
+

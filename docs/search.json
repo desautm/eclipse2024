@@ -9,8 +9,36 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "eclipse2024",
+    "title": "5000 ans d’éclipses",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
+    "text": "La prochaine éclipse solaire totale observable se déroulera le 8 avril 2024. C’est une chance inouïe de pouvoir observer ce phénomène céleste naturel. Un peu de planification sera nécessaire pour ne pas se priver d’un tel spectacle!"
+  },
+  {
+    "objectID": "index.html#éclipse-totale-de-soleil-du-8-avril-2024",
+    "href": "index.html#éclipse-totale-de-soleil-du-8-avril-2024",
+    "title": "5000 ans d’éclipses",
+    "section": "",
+    "text": "La prochaine éclipse solaire totale observable se déroulera le 8 avril 2024. C’est une chance inouïe de pouvoir observer ce phénomène céleste naturel. Un peu de planification sera nécessaire pour ne pas se priver d’un tel spectacle!"
+  },
+  {
+    "objectID": "index.html#étudier-les-données",
+    "href": "index.html#étudier-les-données",
+    "title": "5000 ans d’éclipses",
+    "section": "Étudier les données",
+    "text": "Étudier les données\nPour mieux comprendre les éclipses, nous sommes allés chercher des données s’étalant sur 5 000 ans disponibles sur le site Five Millenium Catalog of Hybrid Solar Eclipses.\nCette base de données regroupe 11898 éclipses s’étalant de l’année -1999 à l’année 3000. Ça correspond à une moyenne de 2.3796 éclipses par année.\nLa base de données sépare les éclipses en 4 types distincts:\n\nÉclipse totale\n\nLa Lune recouvre complètement le Soleil.\n\nÉclipse annulaire\n\nLa Lune se trouve plus près du Soleil. Ainsi, la Lune semble plus petite que le Soleil de notre point de vue. Un anneau du Soleil est visible autour de la Lune.\n\nÉclipse hybride\n\nL’éclipse a des portions d’éclipse totale et annulaire.\n\nÉclipse partielle\n\nLe Soleil et la Lune ne sont pas parfaitement alignés. Seulement une partie du Soleil est cachée par la Lune.\n\n\nDes 11898 éclipses se trouvant dans la base de données, nous pouvons trouver le nombre d’éclipses de chaque type.\n\n\n\n\n\ntype\nn\n\n\n\n\nÉclipse annulaire\n3956\n\n\nÉclipse hybride\n569\n\n\nÉclipse partielle\n4200\n\n\nÉclipse totale\n3173\n\n\n\n\n\nSi nous représentons ces données dans un graphique, nous obtenons:\n\n\n\n\n\nNous remarquons que presque 27% des éclipses sont totales."
+  },
+  {
+    "objectID": "index.html#les-éclipses-selon-les-saisons",
+    "href": "index.html#les-éclipses-selon-les-saisons",
+    "title": "5000 ans d’éclipses",
+    "section": "Les éclipses selon les saisons",
+    "text": "Les éclipses selon les saisons\nPuisque nous avons la date de chacune des éclipses, nous pouvons observer la variation du nombre d’éclipses en fonction du mois de l’année.\n\n\n\n\n\n\nOn remarque une augmentation marquée du nombre d’éclipses totales au milieu de l’année."
+  },
+  {
+    "objectID": "index.html#nombres-de-saros",
+    "href": "index.html#nombres-de-saros",
+    "title": "5000 ans d’éclipses",
+    "section": "Nombres de Saros",
+    "text": "Nombres de Saros\nLe Saros est, en astronomie, une période d’environ 18 ans qui peut être utilisée pour prédire les éclipses de Soleil et de Lune.\nAprès cet intervalle d’un Saros suivant une éclipse, le Soleil, la Terre et la Lune retrouvent approximativement la même configuration relative, et une éclipse presque identique se produit.\nLe Saros est le temps au bout duquel les éclipses de Lune ou de Soleil seront « sensiblement les mêmes » que la fois précédente. Le Saros est une période de 6 585,321 jours, soit 18 ans, 11 jours (10 jours si l’intervalle contient 5 années bissextiles) 7 heures et 43 minutes.\nPuisque la base de données contient les nombres de Saros pour toutes les éclipses sur 5 000 ans, nous pouvons visualiser les récurrences des éclipses en fonction du nombre de Saros."
   }
 ]

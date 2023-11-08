@@ -3,12 +3,10 @@ project:
   output-dir: docs
 
 website:
-  title: "eclipse2024"
+  title: "Éclipse 2024"
   navbar:
     left:
       - href: index.qmd
-        text: Home
-      - about.qmd
 
 format:
   html:
